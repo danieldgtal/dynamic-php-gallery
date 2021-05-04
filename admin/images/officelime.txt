@@ -1,0 +1,225 @@
+# Introduction
+
+Welcome to the Officelime Developer Documentation API! You can use our API to access Officelime API endpoints, which can get information on our solutions, Organization, Payroll, Leave, Appraisal etc. and breeds in our database.
+
+We have language bindings in PHP and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+
+This is a rapid API Documentation to fasttrack developer's activities on our solutions.
+
+# Authentication
+
+> To authorize, use this code:
+
+```ruby
+require 'Officelime'
+
+api = Officelime::APIClient.authorize!('meowmeowmeow')
+```
+
+```python
+import Officelime
+
+api = Officelime.authorize('meowmeowmeow')
+```
+
+```shell
+# With shell, you can just pass the correct header with each request
+curl "api_endpoint_here" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const Officelime = require("Officelime");
+
+let api = Officelime.authorize("meowmeowmeow");
+```
+
+> Make sure to replace `meowmeowmeow` with your API key.
+
+Officelime uses API Secret keys to allow access to the API, Currently you can only make a request to get access to individual secret key. send an email to info@adexfe.com for more info to getting access to secret keys.
+
+Officelime expects for the API key to be included in all API requests to the server in a header that looks like the following:
+
+Officelime expects for client ID(email address) and secret key to be included in the first API request in a header which will generate a token for subsequent requests to the server.
+
+`Authorization: {email ID}{secret key}`
+
+<aside class="notice">
+You must replace <code>{email ID}</code> with your personal email address.
+</aside>
+
+<aside class="notice">
+You must also replace <code>{Secret key}</code> with your personal API Secret key.
+</aside>
+
+# Kittens
+
+## Get All Kittens
+
+```ruby
+require 'Officelime'
+
+api = Officelime::APIClient.authorize!('meowmeowmeow')
+api.kittens.get
+```
+
+```python
+import Officelime
+
+api = Officelime.authorize('meowmeowmeow')
+api.kittens.get()
+```
+
+```shell
+curl "http://example.com/api/kittens" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const Officelime = require("Officelime");
+
+let api = Officelime.authorize("meowmeowmeow");
+let kittens = api.kittens.get();
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Fluffums",
+    "breed": "calico",
+    "fluffiness": 6,
+    "cuteness": 7
+  },
+  {
+    "id": 2,
+    "name": "Max",
+    "breed": "unknown",
+    "fluffiness": 5,
+    "cuteness": 10
+  }
+]
+```
+
+This endpoint retrieves all kittens.
+
+### HTTP Request
+
+`GET http://example.com/api/kittens`
+
+### Query Parameters
+
+| Parameter    | Default | Description                                                                      |
+| ------------ | ------- | -------------------------------------------------------------------------------- |
+| include_cats | false   | If set to true, the result will also include cats.                               |
+| available    | true    | If set to false, the result will include kittens that have already been adopted. |
+
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+## Get a Specific Kitten
+
+```ruby
+require 'Officelime'
+
+api = Officelime::APIClient.authorize!('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```python
+import Officelime
+
+api = Officelime.authorize('meowmeowmeow')
+api.kittens.get(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const Officelime = require("Officelime");
+
+let api = Officelime.authorize("meowmeowmeow");
+let max = api.kittens.get(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "name": "Max",
+  "breed": "unknown",
+  "fluffiness": 5,
+  "cuteness": 10
+}
+```
+
+This endpoint retrieves a specific kitten.
+
+<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+
+### HTTP Request
+
+`GET http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+| Parameter | Description                      |
+| --------- | -------------------------------- |
+| ID        | The ID of the kitten to retrieve |
+
+## Delete a Specific Kitten
+
+```ruby
+require 'Officelime'
+
+api = Officelime::APIClient.authorize!('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```python
+import Officelime
+
+api = Officelime.authorize('meowmeowmeow')
+api.kittens.delete(2)
+```
+
+```shell
+curl "http://example.com/api/kittens/2" \
+  -X DELETE \
+  -H "Authorization: meowmeowmeow"
+```
+
+```javascript
+const Officelime = require("Officelime");
+
+let api = Officelime.authorize("meowmeowmeow");
+let max = api.kittens.delete(2);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "id": 2,
+  "deleted": ":("
+}
+```
+
+This endpoint deletes a specific kitten.
+
+### HTTP Request
+
+`DELETE http://example.com/kittens/<ID>`
+
+### URL Parameters
+
+| Parameter | Description                    |
+| --------- | ------------------------------ |
+| ID        | The ID of the kitten to delete |

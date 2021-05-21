@@ -52,7 +52,7 @@ if(isset($_POST['update'])) {
           users
           <small>Subheading</small>
         </h1>
-        <div class="col-md-6">
+        <div class="col-md-6 user_image_box">
           <a href="#" data-toggle="modal" data-target="#photo-library"> <img src="<?php echo $user->image_path_and_placeholder(); ?>" alt="" width="200" height="200"></a><br>
           <?php echo  $user->image_path_and_placeholder(); ?>
         </div>
@@ -86,6 +86,10 @@ if(isset($_POST['update'])) {
             </div>
 
             <div class="form-group">
+              <a id="user-id" href="delete-user.php?id=<?php echo $user->id; ?>" class="btn btn-danger">Delete</a>
+            </div>
+
+            <div class="form-group">
               <input
                 type="submit"
                 name="update"
@@ -93,7 +97,6 @@ if(isset($_POST['update'])) {
                 value="update"
               />
             </div>
-
           </div>
 
         </form>
@@ -104,13 +107,6 @@ if(isset($_POST['update'])) {
   <!-- /.container-fluid -->
 </div>
 
-<script>
- $(document).ready(function () {
-	$(".modal_thumbnails").click(function () {
-		$("#set_user_image").prop("disabled",false);
-    
-	});
-});
-</script>
+
 <!-- /#page-wrapper -->
 <?php include("includes/footer.php"); ?>

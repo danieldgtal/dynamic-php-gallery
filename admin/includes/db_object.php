@@ -64,19 +64,19 @@ class Db_object {
     }
 
     public static function find_by_id($id){
-    // This method find user in the database by id
-    global $database;
-    
-    $the_result_array = static::query_finder("SELECT * FROM  ". static::$db_table. " WHERE id = $id LIMIT 1");
-    
-    return !empty($the_result_array) ? array_shift($the_result_array) :false;  
+      // This method find user in the database by id
+      global $database;
+      
+      $the_result_array = static::query_finder("SELECT * FROM  ". static::$db_table. " WHERE id = $id LIMIT 1");
+      
+      return !empty($the_result_array) ? array_shift($the_result_array) :false;  
     }
 
 
-   private static function instantiation($the_record){
+  private static function instantiation($the_record){
 
-      $calling_class = get_called_class();
-      $the_object = new $calling_class; //This line instantiate the Class
+    $calling_class = get_called_class();
+    $the_object = new $calling_class; //This line instantiate the Class
 
       // $the_object->id = $found_user['id'];
       // $the_object->username = $found_user['username'];
@@ -164,25 +164,25 @@ class Db_object {
     }//Create Method
 
 
-   public function update(){
-      global $database;
+  public function update(){
+    global $database;
 
-      $properties = $this->clean_properties();
-      $properties_pairs  = array();
+    $properties = $this->clean_properties();
+    $properties_pairs  = array();
 
-      foreach($properties as $key =>$value){
-         $properties_pairs[] = "{$key} ='{$value}'";
-      }
+    foreach($properties as $key =>$value){
+        $properties_pairs[] = "{$key} ='{$value}'";
+    }
 
-      $sql  = "UPDATE  ".static::$db_table . " SET ";  
-      $sql  .= implode(",", $properties_pairs);
-      $sql .= " WHERE id= " .$database->escape_string($this->id);
+    $sql  = "UPDATE  ".static::$db_table . " SET ";  
+    $sql  .= implode(",", $properties_pairs);
+    $sql .= " WHERE id= " .$database->escape_string($this->id);
       
-      $database->query($sql);
+    $database->query($sql);
 
-      return (mysqli_affected_rows($database->conn) == 1)? true : false;
+    return (mysqli_affected_rows($database->conn) == 1)? true : false;
 
-   }//End of update method
+  }//End of update method
 
   public function delete(){
     global $database;

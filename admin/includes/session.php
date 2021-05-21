@@ -23,24 +23,24 @@ class Session {
       }
    }
 
-   private function check_message(){
-      
-      if(isset($_SESSION['message'])){
-         
-         $this->message = $_SESSION['message'];
-         unset($_SESSION['message']);
-      } else {
-         $this->message = "";
-      }
-   }
-   public function is_signed_in(){
-      return $this->signed_in;
-   }
+  private function check_message(){
+    
+    if(isset($_SESSION['message'])){
+        
+      $this->message = $_SESSION['message'];
+      unset($_SESSION['message']);
+    } else {
+      $this->message = "";
+    }
+  }
+  public function is_signed_in(){
+    return $this->signed_in;
+  }
 
-   public function login($user){
-      $this->user_id = $_SESSION['user_id'] = $user->id;
-      $this->signed_in = true;
-   }
+  public function login($user){
+    $this->user_id = $_SESSION['user_id'] = $user->id;
+    $this->signed_in = true;
+  }
 
    public function logout(){
       

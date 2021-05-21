@@ -124,7 +124,7 @@ class User extends Db_object {
       return empty($this->user_image) ? $this->image_placeholder : $this->upload_directory.DS.$this->user_image;
    }
 
-   public static function verify_user($username, $password){
+    public static function verify_user($username, $password){
       global $database;
       
       $username = $database->escape_string($username);
@@ -142,16 +142,35 @@ class User extends Db_object {
 
    }
 
-   public function delete_user(){
-      if($this->delete()){
-        $target_path = SITE_ROOT .DS. 'admin' .DS. $this->user_image;
-        return unlink($target_path) ?true: false;
+  public function delete_user(){
+    if($this->delete()){
+      $target_path = SITE_ROOT .DS. 'admin' .DS. $this->user_image;
+      return unlink($target_path) ?true: false;
         
-      }else {
-        return false;
-      }
+    }else {
+      return false;
     }
+  }
 
+  public function ajax_save_user_image($user_image, $user_id){
+    global $database;
+
+    $user_image = $database->escape_string($user_image);
+    $user_id = $database->escape_string($user_id);
+
+    $this->user_image = $user_image;
+    $this->id = $user_id;
+
+    $sql = "UPDATE ". self::$db_table . " SET user_image = '{$this->user_image}' ";
+    $sql .= "WHERE id = {$this->id}";
+    $update_image = $database->query($sql);
+
+    echo $this->image_path_and_placeholder();
+
+
+
+
+  }
 
    
   
